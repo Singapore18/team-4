@@ -2,11 +2,19 @@ import React, { Component } from 'react';
 import StudentDataComponent  from './StudentData'
 import { Switch, Route } from 'react-router-dom'
 import './App.css';
+
+//import Login from './login'
+import Chart from './chart'
+
 import Login from './login'
 import QuestionComponent from './Question'
+
 import QuizComponent from './Quiz'
 import QuestionaireComponent from './Questionaire' 
 import Thank from './Thank'
+
+
+
 
 class App extends Component {
   render() {
