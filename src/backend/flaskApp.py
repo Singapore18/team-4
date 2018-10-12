@@ -81,7 +81,7 @@ def getScore():
     for reponses in listOfResponses:
         for m,n in score.items():
             if responses['mid'] == m:
-                score[m] += v
+                score[m] += responses['value']
 
     return json.dumps(score, ensure_ascii=False)
 
