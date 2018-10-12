@@ -9,6 +9,16 @@ class QuestionBank(db.Model):
     mid = db.Column(db.Integer)
     rev = db.Column(db.Boolean)
 
+    @property
+    def serialize(self):
+       """Return object data in easily serializeable format"""
+       return {
+           'question' : self.question,
+           'kid' : self.kid,
+           'mid' : self.mid,
+           'rev' : self.rev
+       }
+
 
 class Keystone(db.Model):
     id = db.Column(db.Integer, primary_key=True)

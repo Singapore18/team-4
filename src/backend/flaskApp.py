@@ -26,11 +26,10 @@ def register():
 def getAllStudents():
     return Student.query.all()
 
-
 @app.route('/questions', methods=['GET'])
 def getAllQuestions():
-    questions = QuestionBank.query.all()
-    return jsonify([QuestionBank.serialize(question) for question in questions])
+    # questions = QuestionBank.query.all()
+    return jsonify(json_list=[i.serialize for i in QuestionBank.query.all()])
     # print(QuestionBank.query.all())
     # return "hi"
     # return json.dumps(QuestionBank.query.all())
@@ -39,6 +38,7 @@ def getAllQuestions():
 def postResults():
     # try:
     #     _results = request.form['results']
+    pass
 
 @app.route('/questions', methods=['POST'])
 def setResults():
