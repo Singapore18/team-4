@@ -65,7 +65,7 @@ export default class QuizComponent extends React.Component {
                                     <select 
                                         onChange={(event) => this.handleChange(event, index)}
                                         required>
-                                        {/* <option disabled selected> </option> */}
+                                        <option>{sevenPoint[Math.floor(Math.random() * 5)]}</option>
                                         {
                                             sevenPoint.map((item2, index2) => {
                                                 return (

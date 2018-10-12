@@ -19,5 +19,5 @@ export const qn = [
 ]
 
 export const sevenPoint = [
-    "Strongly Agree", "...", "Neutral",  "...", "Strongly Disagree"
+    "Strongly Agree", "Agree", "Neutral",  "Disagree", "Strongly Disagree"
 ]

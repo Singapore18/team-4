@@ -14,15 +14,30 @@ export default class QuestionaireComponent extends React.Component {
             name: 'darryl',
             questions: [],
             times: 0,
+            link: ''
         }
         this.tok = this.tok.bind(this)
+        this.tick = this.tick.bind(this)
+    }
+
+    componentDidMount() {
+        const that = this;
+        fetch("http://localhost:5002/questions")
+            .then(function(response) {                
+                return response.json();
+            })
+            .then(function(data) {
+                console.log(data)
+                that.setState({ questions: data.json_list });
+        });
     }
 
     tick(){
-        var time = this.state.times + 1
-        this.setState({
-            times: time
-        })
+        this.setState(prevState => {
+            return {
+                times: prevState.times + 1
+            }
+         })
     }
 
     handleChange(event, index){
@@ -53,13 +68,14 @@ export default class QuestionaireComponent extends React.Component {
             <div className="question-container">
                 <div style={{padding:'20px', backgroundColor:'white', width: '50%'}}>
                     <div>
-                        <div>
-                        {this.state.times}
-                        </div>
+                        
                         <div onClick={this.tok}>
                             <p>
                                 Questionarie
                             </p>
+                        </div>
+                        <div style={{fontSize:'30px'}}>
+                        {this.state.times}
                         </div>
                     </div>
                     <form>
@@ -89,10 +105,14 @@ export default class QuestionaireComponent extends React.Component {
                             )
                         })
                     }
-                        <button className="submit-button" type="submit">Submit</button>
+                        <button className="submit-button" type="submit"><Link to={this.state.times < 10 ? '/thankyou' : '/survey'}>Submit</Link></button>
                     </form>
+                    <div style={{fontSize:'30px'}}>
+                        {this.state.times}
+                        </div>
                     {/* <button onClick={() => console.log(questionArr)}>Submit</button> */}
                 </div>
+                
             </div>
         )
     }
