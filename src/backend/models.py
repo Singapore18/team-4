@@ -41,6 +41,24 @@ class Metric(db.Model):
 class Student(db.Model):
     nric = db.Column(db.String(4), primary_key=True)
 
+class Response(db.Model):
+    qid = db.Column(db.Integer, primary_key=True)
+    sid = db.Column(db.Integer, primary_key=True)
+    value = db.Column(db.Integer)
+    kid = db.Column(db.Integer)
+    mid = db.Column(db.Integer)
+
+    @property
+    def serialize(self):
+       """Return object data in easily serializeable format"""
+       return {
+           'qid' : self.qid,
+           'sid' : self.sid,
+           'value' : self.value,
+           'kid' : self.kid,
+           'mid' : self.mid
+       }
+
 
 db.create_all()
 

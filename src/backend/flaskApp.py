@@ -29,11 +29,30 @@ def getAllStudents():
 
 @app.route('/questions', methods=['GET'])
 def getAllQuestions():
-    # questions = QuestionBank.query.all()
     return jsonify(json_list=[i.serialize for i in QuestionBank.query.all()])
-    # print(QuestionBank.query.all())
-    # return "hi"
-    # return json.dumps(QuestionBank.query.all())
+   
+@app.route('/response', methods=['POST'])
+def postAnswer():
+    data = request.get_json()
+    print(data)
+
+    for response in data["response"]:
+        qid = response["qid"]
+        sid = response["sid"]
+        value = response["value"]
+        kid = response["kid"]
+        mid = response["mid"]
+        db.session.add(Response(qid=qid, sid=sid, value=value, kid=kid, mid=mid))
+    db.session.commit()
+    
+    return jsonify(
+        status = 200
+    )
+
+
+@app.route('/response', methods=['GET'])
+def getAnswer():
+    return jsonify(json_list=[i.serialize for i in Response.query.all()])
 
 @app.route('/postResults', methods=['POST'])
 def postResults():
@@ -41,9 +60,9 @@ def postResults():
     #     _results = request.form['results']
     pass
 
-@app.route('/questions', methods=['POST'])
-def setResults():
-    return json.dumps(QuestionBank.query.all())
+# @app.route('/questions', methods=['POST'])
+# def setResults():
+#     return json.dumps(QuestionBank.query.all())
 
 # @app.route('/survey', methods=['GET'])
 # def getAllSurveys():
@@ -57,9 +76,9 @@ def setResults():
 def getAllKeystone():
     return jsonify(json_list=[i.serialize for i in Keystone.query.all()])
 
-@app.route('/results', methods=['GET'])
-def getAllResults():
-    return Result.query.all()
+# @app.route('/results', methods=['GET'])
+# def getAllResults():
+#     return Result.query.all()
 
 @app.route('/score', methods=['GET'])
 def getScore():
