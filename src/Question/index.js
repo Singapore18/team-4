@@ -81,7 +81,7 @@ export default class QuestionComponent extends React.Component {
                             )
                         })
                     }
-                        <button className="submit-button" type="submit"><Link to='/thankyou'>Submit</Link></button>
+                        <button className="submit-button" type="submit"><Link to='/thankyou'>Next Page</Link></button>
                     </form>
                     {/* <button onClick={() => console.log(questionArr)}>Submit</button> */}
                 </div>

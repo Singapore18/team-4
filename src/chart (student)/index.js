@@ -22,21 +22,7 @@ const data = {
             backgroundColor: ["#3e95cd", "#3e95cd", "#8e5ea2", "#8e5ea2", "#8e5ea2", "#3cba9f", "#3cba9f", "#3cba9f",
                 "#e8c3b9", "#e8c3b9", "#c45850", "#c45850"]
         }
-    ],
-    options: {
-        legend: { display: false },
-        title: {
-          display: true,
-          text: 'xx Score'
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    suggestedMin:0
-                }
-            }]
-        }
-    }
+    ]
 }
 
 const options = {
@@ -56,7 +42,7 @@ export default class Chart extends React.Component {
                     legend: { display: false },
                     title: {
                       display: true,
-                      text: 'xx Score'
+                      text: 'Your Score'
                     },
                     scales: {
                         yAxes: [{
