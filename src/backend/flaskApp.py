@@ -17,6 +17,11 @@ df.to_sql(con=engine, index_label='id', name=cdb1.__tablename__, if_exists='repl
 
 
 
+from models import db
+from models import app
+from models import Keystone
+from models import QuestionBank
+from models import Metric
 
 @app.route('/register', methods=['POST','GET'])
 def register():
@@ -58,7 +63,7 @@ def getAllMetrics():
 
 @app.route('/survey', methods=['GET'])
 def getAllKeystone():
-    return Survey.query.all()
+    return Keystone.query.all()
 
 
 @app.route('/results', methods=['GET'])
@@ -66,5 +71,9 @@ def getAllResults():
     return Result.query.all()
 
 
+
 if __name__ == "__main__":
     app.run(port=5002)
+    
+
+print(getAllKeystone())
