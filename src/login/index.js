@@ -1,5 +1,7 @@
 import React from 'react';
 import './login.css'
+import '../Question/styles.css'
+import { Link } from 'react-router-dom'
 
 export default class Login extends React.Component {
     render() {
@@ -10,16 +12,17 @@ export default class Login extends React.Component {
                 </div>
 
                 <div className="login-container">
-                <form id="username" action="/">
-                        <label>Username </label>
-                        <input type="text" name="uname"></input>
-                        <br></br>
-                        <label>Password </label>
-                        <input type = "password" name="pass"></input>
-                        <br></br>
-                        <br></br>
-                        <input type="button" onclick="myFunction()" value="Submit"></input>
-                    </form>
+                    <form className="form-style" style={{padding: '100px', width:'15%'}} id="username" action="/">
+                            <div style={{marginBottom:'15px', width:'100%', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+                                <label style={{fontSize: '17px'}}>Username </label>
+                                <input style={{width: '60%', height:'30px'}} type="text" name="uname"></input>
+                            </div>
+                            <div style={{width:'100%', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+                                <label style={{fontSize: '17px'}}>Password </label>
+                                <input style={{width: '60%', height:'30px'}} type="password" name="password"></input>
+                            </div>
+                            <button className="submit-button"><Link style={{textDecoration:'none', color:'white'}} to='/survey'>Login!</Link></button>
+                        </form>
                 </div>
             </div>
         )
