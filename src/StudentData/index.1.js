@@ -1,7 +1,6 @@
 import React from 'react'
 import './styles.css'
 import { qn, sevenPoint } from './constants'
-import {Link} from 'react-router-dom'
 
 
 
@@ -81,7 +80,7 @@ export default class QuestionComponent extends React.Component {
                             )
                         })
                     }
-                        <button className="submit-button" type="submit"><Link to='/thankyou'>Submit</Link></button>
+                        <button className="submit-button" type="submit">Submit</button>
                     </form>
                     {/* <button onClick={() => console.log(questionArr)}>Submit</button> */}
                 </div>

@@ -4,6 +4,37 @@ import '../Question/styles.css'
 import { Link } from 'react-router-dom'
 
 export default class Login extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            link: ''
+        }
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleChange(e){
+        var name = e.target.value
+        if(name === '1'){
+            this.setState({
+                link: '/survey'
+            })
+        } else if(name === '2'){
+            this.setState({
+                link: '/quiz'
+            }) 
+        } else if(name === '3'){
+            this.setState({
+                link: '/questionaire'
+            })
+        } else if(name === '4'){
+            this.setState({
+                link: '/keystonequiz'
+            })
+        }
+    }
+
+    
+
     render() {
         return (
             <div>
@@ -15,13 +46,13 @@ export default class Login extends React.Component {
                     <form className="form-style" style={{padding: '100px', width:'15%'}} id="username" action="/">
                             <div style={{marginBottom:'15px', width:'100%', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                                 <label style={{fontSize: '17px'}}>Username </label>
-                                <input style={{width: '60%', height:'30px'}} type="text" name="uname"></input>
+                                <input onChange={(event) => this.handleChange(event)} style={{width: '60%', height:'30px'}} type="text" name="uname"></input>
                             </div>
                             <div style={{width:'100%', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                                 <label style={{fontSize: '17px'}}>Password </label>
                                 <input style={{width: '60%', height:'30px'}} type="password" name="password"></input>
                             </div>
-                            <button className="submit-button"><Link style={{textDecoration:'none', color:'white'}} to='/survey'>Login!</Link></button>
+                            <button className="submit-button"><Link style={{textDecoration:'none', color:'white'}} to={this.state.link}>Login!</Link></button>
                         </form>
                 </div>
             </div>

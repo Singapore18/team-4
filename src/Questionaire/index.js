@@ -1,31 +1,28 @@
 import React from 'react'
 import './styles.css'
-import { qn, sevenPoint } from './constants'
+import { qn, sevenPoint } from '../Question/constants'
 import {Link} from 'react-router-dom'
+// import ChartOverall from '..'
 
 
-
-export default class QuestionComponent extends React.Component {
+export default class QuestionaireComponent extends React.Component {
 
     constructor(props){
         super(props)
         this.handleChange = this.handleChange.bind(this)
         this.state = {
             name: 'darryl',
-            questions: []
+            questions: [],
+            times: 0,
         }
+        this.tok = this.tok.bind(this)
     }
 
-    componentDidMount() {
-        const that = this;
-        fetch("http://localhost:5002/questions")
-            .then(function(response) {                
-                return response.json();
-            })
-            .then(function(data) {
-                console.log(data)
-                that.setState({ questions: data.json_list });
-        });
+    tick(){
+        var time = this.state.times + 1
+        this.setState({
+            times: time
+        })
     }
 
     handleChange(event, index){
@@ -47,13 +44,24 @@ export default class QuestionComponent extends React.Component {
         }
     }
 
+    tok(){
+        setInterval(this.tick,1000)
+    }
+
     render(){
         return (
             <div className="question-container">
                 <div style={{padding:'20px', backgroundColor:'white', width: '50%'}}>
-                    <p>
-                        Questionarie
-                    </p>
+                    <div>
+                        <div>
+                        {this.state.times}
+                        </div>
+                        <div onClick={this.tok}>
+                            <p>
+                                Questionarie
+                            </p>
+                        </div>
+                    </div>
                     <form>
                     {
 
@@ -81,7 +89,7 @@ export default class QuestionComponent extends React.Component {
                             )
                         })
                     }
-                        <button className="submit-button" type="submit"><Link to='/thankyou'>Submit</Link></button>
+                        <button className="submit-button" type="submit">Submit</button>
                     </form>
                     {/* <button onClick={() => console.log(questionArr)}>Submit</button> */}
                 </div>
