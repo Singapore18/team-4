@@ -12,12 +12,12 @@ app = Flask(__name__)
 # db = SQLAlchemy(app)
 
 # load questions into questionBank table in DB
-engine = create_engine('sqlite:///cdb.db')
-Base.metadata.create_all(engine)
-
-df = pandas.read_csv("questions.csv")
-df.to_sql(con=engine, name=cdb1.QuestionBank, if_exists='replace')
-df.to_sql(con=engine, index_label='id', name=cdb1.__tablename__, if_exists='replace')
+# engine = create_engine('sqlite:///cdb.db')
+# Base.metadata.create_all(engine)
+#
+# df = pandas.read_csv("questions.csv")
+# df.to_sql(con=engine, name=cdb1.QuestionBank, if_exists='replace')
+# df.to_sql(con=engine, index_label='id', name=cdb1.__tablename__, if_exists='replace')
 
 @app.route('/register', methods=['POST','GET'])
 def register():
@@ -61,7 +61,7 @@ def getAllSurveys():
 def getAllMetrics():
     return Survey.query.all()
 
-@app.route('/survey', methods=['GET'])
+@app.route('/keystone', methods=['GET'])
 def getAllKeystone():
     return Keystone.query.all()
 
@@ -73,6 +73,3 @@ def getAllResults():
 
 if __name__ == "__main__":
     app.run(port=5002)
-    
-
-print(getAllKeystone())
