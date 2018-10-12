@@ -1,11 +1,10 @@
 import React from 'react'
 import './styles.css'
-import { qn, sevenPoint } from './constants'
+import { qn, sevenPoint } from '../Question/constants'
 import {Link} from 'react-router-dom'
 
 
-
-export default class QuestionComponent extends React.Component {
+export default class QuizComponent extends React.Component {
 
     constructor(props){
         super(props)
@@ -66,7 +65,7 @@ export default class QuestionComponent extends React.Component {
                                     <select 
                                         onChange={(event) => this.handleChange(event, index)}
                                         required>
-                                        {/* <option disabled selected> </option> */}
+                                        <option>{sevenPoint[Math.floor(Math.random() * 5)]}</option>
                                         {
                                             sevenPoint.map((item2, index2) => {
                                                 return (
@@ -81,7 +80,7 @@ export default class QuestionComponent extends React.Component {
                             )
                         })
                     }
-                        <button className="submit-button" type="submit"><Link to='/thankyou'>Next Page</Link></button>
+                        <button className="submit-button" type="submit"><Link to='/survey'>Next Page</Link></button>
                     </form>
                     {/* <button onClick={() => console.log(questionArr)}>Submit</button> */}
                 </div>
