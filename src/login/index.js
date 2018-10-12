@@ -1,6 +1,7 @@
 import React from 'react';
 import './login.css'
 import '../Question/styles.css'
+import ChartOverall from '../chart (overall)'
 import { Link } from 'react-router-dom'
 
 export default class Login extends React.Component {
@@ -22,7 +23,8 @@ export default class Login extends React.Component {
                                 <input style={{width: '60%', height:'30px'}} type="password" name="password"></input>
                             </div>
                             <button className="submit-button"><Link style={{textDecoration:'none', color:'white'}} to='/survey'>Login!</Link></button>
-                        </form>
+                        </form> 
+                        
                 </div>
             </div>
         )
