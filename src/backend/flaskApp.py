@@ -5,6 +5,7 @@ from models import Keystone
 from models import QuestionBank
 from models import Metric
 from models import Student
+from models import Response
 # from models import Survey
 
 from app import db, app
