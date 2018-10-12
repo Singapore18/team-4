@@ -9,7 +9,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 db = SQLAlchemy(app)
 
 class QuestionBank(db.Model):
-    qid = db.Column(db.Integer, autoincrement=1, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     question = db.Column(db.String(150))
     kid = db.Column(db.Integer)
     mid = db.Column(db.Integer)
@@ -17,15 +17,17 @@ class QuestionBank(db.Model):
 
 
 class Keystone(db.Model):
-    kid = db.Column(db.Integer, autoincrement=1, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(20))
+
+    def __repr__(self):
+        return '<Keystone %r>' % self.description
 
 
 class Metric(db.Model):
-    mid = db.Column(db.Integer, autoincrement=1, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(20))
     kid = db.Column(db.Integer)
-
 
 
 class Student(db.Model):
@@ -34,9 +36,6 @@ class Student(db.Model):
     
 db.create_all()
 
-keystone1 = Keystone(kid=1, description='Growth Oriented')
-# keystone2 = 
+keystone1 = Keystone(description='Growth Oriented')
 db.session.add(keystone1)
 db.session.commit()
-
-Keystone.query.all()
