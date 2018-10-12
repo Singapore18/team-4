@@ -82,7 +82,30 @@ def getAllKeystone():
 # def getAllResults():
 #     return Result.query.all()
 
+@app.route('/score', methods=['GET'])
+def getScore():
+    score = {
+           'g1' : 0,
+           'g2' : 0,
+           'c1' : 0,
+           'c2' : 0,
+           's1' : 0,
+           's2' : 0,
+           's3' : 0,
+           't1' : 0,
+           't2' : 0,
+           'p1' : 0,
+           'p2' : 0,
 
+       }
+
+    listOfResponses = [i.serialize for i in Response.query.all()]
+    for reponses in listOfResponses:
+        for m,n in score.items():
+            if responses['mid'] == m:
+                score[m] += responses['value']
+
+    return json.dumps(score, ensure_ascii=False)
 
 if __name__ == "__main__":
     app.run(port=5002)
