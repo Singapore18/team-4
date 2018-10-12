@@ -1,10 +1,9 @@
 from flask import Flask, jsonify, request, json
-from flaskext.mysql import MySQL
+from flask_sqlalchemy import SQLAlchemy
 
-mysql = MySQL()
 app = Flask(__name__)
-
-mysql.init_app(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+db = SQLAlchemy(app)
 
 @app.route('/register', methods=['POST','GET'])
 def register():
@@ -12,8 +11,9 @@ def register():
         _studentID = request.form['studentID']
 
         if _studentID:
-            conn = mysql.connect()
-            cursor = conn.cursor()
+            newStudent = studentID(_studentID)
+            db.session.add(newStudent)
+            db.session.commit()
     except:
         pass
 
@@ -24,7 +24,7 @@ def getAllStudents():
 
 @app.route('/questions', methods=['GET'])
 def getAllQuestions():
-    pass
+    questions = db.Table('census', metadata, autoload=True, autoload_with=engine)
 
 
 @app.route('/survey', methods=['GET'])
