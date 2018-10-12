@@ -2,6 +2,11 @@ from flask import Flask, jsonify, request, json
 from flask_sqlalchemy import SQLAlchemy
 import pandas as pd
 from models import QuestionBank
+from models import db
+from models import app
+from models import Keystone
+from models import QuestionBank
+from models import Metric
 
 app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
@@ -15,13 +20,6 @@ df = pandas.read_csv("questions.csv")
 df.to_sql(con=engine, name=cdb1.QuestionBank, if_exists='replace')
 df.to_sql(con=engine, index_label='id', name=cdb1.__tablename__, if_exists='replace')
 
-
-
-from models import db
-from models import app
-from models import Keystone
-from models import QuestionBank
-from models import Metric
 
 @app.route('/register', methods=['POST','GET'])
 def register():
