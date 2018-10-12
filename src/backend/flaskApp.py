@@ -1,21 +1,35 @@
 from flask import Flask, jsonify, request, json
 from flask_sqlalchemy import SQLAlchemy
+import pandas as pd
+from models import QuestionBank
 
-app = Flask("FlaskApp.py")
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
-db = SQLAlchemy(app)
+app = Flask(__name__)
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+# db = SQLAlchemy(app)
+
+# load questions into questionBank table in DB
+engine = create_engine('sqlite:///cdb.db')
+Base.metadata.create_all(engine)
+
+df = pandas.read_csv("questions.csv")
+df.to_sql(con=engine, name=cdb1.QuestionBank, if_exists='replace')
+df.to_sql(con=engine, index_label='id', name=cdb1.__tablename__, if_exists='replace')
+
+
+
 
 @app.route('/register', methods=['POST','GET'])
 def register():
-    try:
-        _nric = request.form['nric']
+    # try:
+    #     _nric = request.form['nric']
 
-        if _studentID:
-            newStudent = Student(nric = _nric)
-            db.session.add(newStudent)
-            db.session.commit()
-    except:
-        pass
+    #     if _studentID:
+    #         newStudent = Student(nric = _nric)
+    #         db.session.add(newStudent)
+    #         db.session.commit()
+    # except:
+    #     pass
+    return "hello world"
 
 @app.route('/students', methods=['GET'])
 def getAllStudents():
