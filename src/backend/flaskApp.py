@@ -4,18 +4,10 @@ from flaskext.mysql import MySQL
 mysql = MySQL()
 app = Flask(__name__)
 
-mysql.init_app(app)
 
 @app.route('/register', methods=['POST','GET'])
 def register():
-    try:
-        _studentID = request.form['studentID']
-
-        if _studentID:
-            conn = mysql.connect()
-            cursor = conn.cursor()
-    except:
-        pass
+    return "Hello World"
 
 @app.route('/students', methods=['GET'])
 def getAllStudents():
