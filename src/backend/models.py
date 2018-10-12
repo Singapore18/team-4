@@ -1,12 +1,6 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 import os
+from app import db
 
-app = Flask(__name__)
-db_path = os.path.join(os.path.dirname(__file__), 'app.db')
-db_url = 'sqlite:///{}'.format(db_path)
-app.config['SQLALCHEMY_DATABASE_URI'] = db_url
-db = SQLAlchemy(app)
 
 class QuestionBank(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -39,3 +33,13 @@ db.create_all()
 keystone1 = Keystone(description='Growth Oriented')
 db.session.add(keystone1)
 db.session.commit()
+
+import csv
+with open('questionbank.csv', newline='') as csvfile:
+    reader = csv.reader(csvfile)
+    for row in reader:
+        rev = False
+        if row[3] == '1':
+            rev = True
+        db.session.add(QuestionBank(question=row[0], kid=row[1], mid=row[2], rev=rev))
+    db.session.commit()

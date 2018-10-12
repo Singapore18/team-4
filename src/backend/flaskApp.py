@@ -1,25 +1,13 @@
 from flask import Flask, jsonify, request, json
-from flask_sqlalchemy import SQLAlchemy
-import pandas as pd
+
 from models import QuestionBank
-from models import db
-from models import app
 from models import Keystone
 from models import QuestionBank
 from models import Metric
+from models import Student
+# from models import Survey
 
-app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
-# db = SQLAlchemy(app)
-
-# load questions into questionBank table in DB
-engine = create_engine('sqlite:///cdb.db')
-Base.metadata.create_all(engine)
-
-df = pandas.read_csv("questions.csv")
-df.to_sql(con=engine, name=cdb1.QuestionBank, if_exists='replace')
-df.to_sql(con=engine, index_label='id', name=cdb1.__tablename__, if_exists='replace')
-
+from app import db, app
 
 @app.route('/register', methods=['POST','GET'])
 def register():
@@ -41,7 +29,11 @@ def getAllStudents():
 
 @app.route('/questions', methods=['GET'])
 def getAllQuestions():
-    return QuestionBank.query.all()
+    questions = QuestionBank.query.all()
+    return jsonify([QuestionBank.serialize(question) for question in questions])
+    # print(QuestionBank.query.all())
+    # return "hi"
+    # return json.dumps(QuestionBank.query.all())
 
 @app.route('/questions', methods=['POST'])
 def setSurvey():
@@ -49,19 +41,19 @@ def setSurvey():
 
 @app.route('/questions', methods=['POST'])
 def setResults():
-    return QuestionBank.query.all()
+    return json.dumps(QuestionBank.query.all())
 
-@app.route('/survey', methods=['GET'])
-def getAllSurveys():
-    return Survey.query.all()
+# @app.route('/survey', methods=['GET'])
+# def getAllSurveys():
+#     return Survey.query.all()
 
-@app.route('/survey', methods=['GET'])
-def getAllMetrics():
-    return Survey.query.all()
+# @app.route('/survey', methods=['GET'])
+# def getAllMetrics():
+#     return Survey.query.all()
 
-@app.route('/survey', methods=['GET'])
-def getAllKeystone():
-    return Keystone.query.all()
+# @app.route('/survey', methods=['GET'])
+# def getAllKeystone():
+#     return Keystone.query.all()
 
 
 @app.route('/results', methods=['GET'])
