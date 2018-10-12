@@ -8,7 +8,15 @@ db = SQLAlchemy(app)
 
 class QuestionBank(db.Model):
     qid = db.Column(db.Integer, primary_key=True)
-    question = db.Column(db.String())
+    question = db.Column(db.String(150))
+    kid = db.Column(db.Integer)
+    mid = db.Column(db.Integer)
+    rev = db.Column(db.Boolean)
+
+
+
+
+    def  
     
 
     id = db.Column(db.Integer, primary_key=True)
