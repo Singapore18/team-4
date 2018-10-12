@@ -33,19 +33,17 @@ def getAllQuestions():
    
 @app.route('/response', methods=['POST'])
 def postAnswer():
-    # print(dir(request))
-    data = request.get_data().decode('utf8')
+    data = request.get_json()
     print(data)
-    
-    # for response in data["response"]:
-    #     print(response)
-    #     qid = data["qid"]
-    #     sid = data["sid"]
-    #     value = data["value"]
-    #     kid = data["kid"]
-    #     mid = data["mid"]
-    #     db.session.add(Response(qid=qid, sid=sid, value=value, kid=kid, mid=mid))
-    # db.session.commit()
+
+    for response in data["response"]:
+        qid = response["qid"]
+        sid = response["sid"]
+        value = response["value"]
+        kid = response["kid"]
+        mid = response["mid"]
+        db.session.add(Response(qid=qid, sid=sid, value=value, kid=kid, mid=mid))
+    db.session.commit()
     
     return jsonify(
         status = 200
