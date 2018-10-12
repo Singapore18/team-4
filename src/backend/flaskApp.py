@@ -54,7 +54,7 @@ def setResults():
 
 @app.route('/keystone', methods=['GET'])
 def getAllKeystone():
-    return Keystone.query.all()
+    return jsonify(json_list=[i.serialize for i in Keystone.query.all()])
 
 @app.route('/results', methods=['GET'])
 def getAllResults():

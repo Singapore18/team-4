@@ -14,8 +14,12 @@ class Keystone(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(20))
 
-    def __repr__(self):
-        return '<Keystone %r>' % self.description
+    @property
+    def serialize(self):
+       """Return object data in easily serializeable format"""
+       return {
+           'description' : self.description
+       }
 
 
 class Metric(db.Model):
