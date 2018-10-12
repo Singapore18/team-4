@@ -26,6 +26,13 @@ def getAllStudents():
 def getAllQuestions():
     return QuestionBank.query.all()
 
+@app.route('/questions', methods=['POST'])
+def setSurvey():
+    return QuestionBank.query.all()
+
+@app.route('/questions', methods=['POST'])
+def setResults():
+    return QuestionBank.query.all()
 
 @app.route('/survey', methods=['GET'])
 def getAllSurveys():
