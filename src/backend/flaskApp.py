@@ -1,7 +1,11 @@
 from flask import Flask, jsonify, request, json
 from flask_sqlalchemy import SQLAlchemy
 import pandas as pd
+from models import db
+from models import app
+from models import Keystone
 from models import QuestionBank
+from models import Metric
 
 app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
@@ -14,14 +18,6 @@ Base.metadata.create_all(engine)
 df = pandas.read_csv("questions.csv")
 df.to_sql(con=engine, name=cdb1.QuestionBank, if_exists='replace')
 df.to_sql(con=engine, index_label='id', name=cdb1.__tablename__, if_exists='replace')
-
-
-
-from models import db
-from models import app
-from models import Keystone
-from models import QuestionBank
-from models import Metric
 
 @app.route('/register', methods=['POST','GET'])
 def register():
@@ -45,13 +41,17 @@ def getAllStudents():
 def getAllQuestions():
     return QuestionBank.query.all()
 
-@app.route('/questions', methods=['POST'])
-def setSurvey():
-    return QuestionBank.query.all()
+@app.route('/postResults', methods=['POST'])
+def postResults():
+    # try:
+    #     _results = request.form['results']
 
-@app.route('/questions', methods=['POST'])
-def setResults():
-    return QuestionBank.query.all()
+    #     if _results:
+    #         newResults = Result(result = _results)
+    #         db.session.add(newResults)
+    #         db.session.commit()
+    # except:
+    #     pass
 
 @app.route('/survey', methods=['GET'])
 def getAllSurveys():
@@ -64,7 +64,6 @@ def getAllMetrics():
 @app.route('/survey', methods=['GET'])
 def getAllKeystone():
     return Keystone.query.all()
-
 
 @app.route('/results', methods=['GET'])
 def getAllResults():
